@@ -2,42 +2,23 @@ import { useEffect, useState } from 'react';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
 import SearchBox from './components/SearchBox/SearchBox';
-import contactData from './components/data/contactData.json';
-import { nanoid } from 'nanoid';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const [userContacts, setUserContacts] = useState(() => {
-    return (
-      JSON.parse(window.localStorage.getItem('contactUser')) ?? contactData
-    );
-  });
   const [serchUser, setSerchUser] = useState('');
 
-  const filteredContacts = userContacts.filter(item =>
-    item.name.toLowerCase().includes(serchUser)
-  );
+  const contactsData = useSelector(state => state.contacts.items);
 
   useEffect(() => {
-    window.localStorage.setItem('contactUser', JSON.stringify(userContacts));
-  }, [userContacts]);
-
-  const addContact = ({ values }) => {
-    setUserContacts(prev => [...prev, { id: nanoid(), ...values }]);
-  };
-
-  const handleDeleteContactUser = id => {
-    setUserContacts(prev => prev.filter(item => item.id !== id));
-  };
+    window.localStorage.setItem('contactUser', JSON.stringify(contactsData));
+  }, [contactsData]);
 
   return (
     <>
       <h1 className='pageTitle'>Phonebook</h1>
-      <ContactForm addContact={addContact} />
+      <ContactForm />
       <SearchBox serchUser={serchUser} setSerchUser={setSerchUser} />
-      <ContactList
-        userContacts={filteredContacts}
-        handleDeleteContactUser={handleDeleteContactUser}
-      />
+      <ContactList />
     </>
   );
 }
