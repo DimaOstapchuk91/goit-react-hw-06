@@ -23,7 +23,11 @@ const ContactForm = () => {
 
   const handleForm = (values, options) => {
     dispatch(
-      addContact({ id: nanoid(), name: values.name, number: values.number })
+      addContact({
+        id: nanoid(),
+        name: values.name.trim().toLowerCase(),
+        number: values.number,
+      })
     );
     options.resetForm();
   };

@@ -12,7 +12,9 @@ const Contact = ({ user }) => {
   return (
     <>
       <div>
-        <p className={s.contactText}>Name: {user.name}</p>
+        <p className={s.contactText}>
+          Name: {user.name.charAt(0).toUpperCase() + user.name.slice(1)}
+        </p>
         <p className={s.contactText}>Phone: {user.number}</p>
       </div>
       <button
