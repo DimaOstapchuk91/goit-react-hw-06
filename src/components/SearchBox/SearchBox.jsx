@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import s from './SearchBox.module.css';
-import { filterContacts } from '../../redux/contact/actions';
+import { changeFilter } from '../../redux/filtersSlice';
 
 const SearchBox = () => {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ const SearchBox = () => {
   const handleSearchUser = event => {
     const form = event.target;
 
-    dispatch(filterContacts(form.value.toLowerCase()));
+    dispatch(changeFilter(form.value.toLowerCase()));
   };
   return (
     <div className={s.serchWrap}>
