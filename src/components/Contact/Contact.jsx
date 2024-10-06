@@ -12,8 +12,8 @@ const Contact = ({ user }) => {
   return (
     <>
       <div>
-        <p className={s.contactText}>{user.name}</p>
-        <p className={s.contactText}>{user.number}</p>
+        <p className={s.contactText}>Name: {user.name}</p>
+        <p className={s.contactText}>Phone: {user.number}</p>
       </div>
       <button
         className={s.contactBtn}
